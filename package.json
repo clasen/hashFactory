@@ -31,12 +31,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/clasen/HashFactory.git"
+    "url": "git+https://github.com/clasen/hashFactory.git"
   },
   "bugs": {
-    "url": "https://github.com/clasen/HashFactory/issues"
+    "url": "https://github.com/clasen/hashFactory/issues"
   },
-  "homepage": "https://github.com/clasen/HashFactory#readme",
+  "homepage": "https://github.com/clasen/hashFactory#readme",
   "devDependencies": {
     "chai": "^5.2.0",
     "mocha": "^11.1.0"
