@@ -1,0 +1,44 @@
+{
+  "name": "hash-factory",
+  "version": "1.0.4",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "demo": "node demo/cases.js"
+  },
+  "author": "Martin Clasen",
+  "license": "MIT",
+  "description": "🆔 hashFactory - A lightweight utility for generating configurable hash strings.",
+  "keywords": [
+    "hash",
+    "id",
+    "slug",
+    "identifier",
+    "url-friendly",
+    "djb2",
+    "filename",
+    "document",
+    "database",
+    "key",
+    "hash",
+    "string",
+    "fast",
+    "custom",
+    "clasen"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clasen/HashFactory.git"
+  },
+  "bugs": {
+    "url": "https://github.com/clasen/HashFactory/issues"
+  },
+  "homepage": "https://github.com/clasen/HashFactory#readme",
+  "devDependencies": {
+    "chai": "^5.2.0",
+    "mocha": "^11.1.0"
+  }
+}
