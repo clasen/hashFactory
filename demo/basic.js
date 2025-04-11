@@ -5,7 +5,8 @@ const hashFactory = require(hashFactoryPath);
 const dbKey = hashFactory({
     alpha: true,
     maxlen: 12,
-    padding: '0'
+    padding: 'xyz',
+    delimiter: ''
 });
 
 console.log(dbKey('user123@example.com'));

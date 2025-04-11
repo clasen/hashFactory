@@ -53,7 +53,7 @@ function hashFactory({ hash = true, wcount = -1, wlen = 6, maxlen = 36, alpha = 
             return str;
         }
         const char = padding === true ? delimiter : padding;
-        return str + delimiter + char.repeat(maxlen - str.length - delimiter.length);
+        return (str + delimiter + char.repeat(maxlen - str.length - delimiter.length)).substring(0, maxlen);
     }
 
     return function hashFunction(str) {

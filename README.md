@@ -40,6 +40,19 @@ wordHash('Hello World');
 const wordAlphaHash = hashFactory({ words: true, alpha: true });
 wordAlphaHash('Hello World');
 // Outputs "hello_world_rh2j5x"
+
+const wordOnly = hashFactory({ hash: false });
+wordOnly('Hello World');
+// Outputs "hello_world"
+
+// You can combine it with other options
+const customWordOnly = hashFactory({
+    hash: false,
+    delimiter: '-',
+    wlen: 4
+});
+customWordOnly('Hello Beautiful World');
+// Outputs "hell-beau-worl"
 ```
 
 ## API Reference
@@ -52,6 +65,7 @@ Returns a hash function configured with the specified options.
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
+| `hash` | Boolean | true | Whether to append a hash to the output |
 | `wcount` | Number | -1 | Number of words to include (-1 for all words) |
 | `wlen` | Number | 6 | Length of each word (-1 for full words) |
 | `maxlen` | Number | 36 | Maximum length of the output hash (-1 for unlimited) |
@@ -87,7 +101,7 @@ const fileId = hashFactory({
   maxlen: 30
 });
 
-console.log(fileId('Quarterly Financial Report Q3 2023.pdf'));
+fileId('Quarterly Financial Report Q3 2023.pdf');
 // Output: "quarte_financ_report_q3_t6ghpa"
 ```
 
@@ -102,7 +116,7 @@ const docId = hashFactory({
   alpha: true
 });
 
-console.log(docId('Meeting Minutes: Project Kickoff January 2023'));
+docId('Meeting Minutes: Project Kickoff January 2023');
 // Output: "meet-minu-proj-1kh0t3m"
 ```
 
@@ -112,11 +126,12 @@ console.log(docId('Meeting Minutes: Project Kickoff January 2023'));
 const dbKey = hashFactory({ 
   alpha: true,
   maxlen: 12,
-  padding: '0'
+  padding: 'xyz',
+  delimiter: ''
 });
 
-console.log(dbKey('user123@example.com'));
-// Output: "19u25oj_0000"
+dbKey('user123@example.com');
+// Output: "19u25ojxyzxy"
 ```
 
 ## Algorithm Details
