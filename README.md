@@ -54,7 +54,7 @@ Returns a hash function configured with the specified options.
 |--------|------|---------|-------------|
 | `wcount` | Number | -1 | Number of words to include (-1 for all words) |
 | `wlen` | Number | 6 | Length of each word (-1 for full words) |
-| `maxlen` | Number | 30 | Maximum length of the output hash (-1 for unlimited) |
+| `maxlen` | Number | 36 | Maximum length of the output hash (-1 for unlimited) |
 | `alpha` | Boolean | false | Use base36 (alphanumeric) encoding instead of decimal |
 | `words` | Boolean | false | Extract words from the input string |
 | `delimiter` | String | '_' | Character(s) to join words and hash |

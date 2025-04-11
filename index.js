@@ -1,4 +1,6 @@
-function hashFactory({ wcount = -1, wlen = 6, maxlen = 36, alpha = false, words = false, delimiter = '_', padding = null } = {}) {
+function hashFactory({ hash = true, wcount = -1, wlen = 6, maxlen = 36, alpha = false, words = false, delimiter = '_', padding = null } = {}) {
+
+    if (hash === false) words = true;
 
     function toInt(str) {
         // Use djb2 algorithm
@@ -14,7 +16,7 @@ function hashFactory({ wcount = -1, wlen = 6, maxlen = 36, alpha = false, words 
         const tokens = text.normalize('NFD')
             .replace(/[\u0300-\u036f]/g, '')
             .replace(/[^a-zA-Z0-9\s_\.-]/g, '')
-            .toLowerCase().split(/[-_\.\s]+/);
+            .toLowerCase().trim().split(/[-_\.\s]+/);
 
         let result = [];
         if (maxlen === -1) {
@@ -55,11 +57,13 @@ function hashFactory({ wcount = -1, wlen = 6, maxlen = 36, alpha = false, words 
     }
 
     return function hashFunction(str) {
-        const hash = alpha ? toInt(str).toString(36) : toInt(str).toString();
-        const result = words ? toWords(str, hash.length) : [];
-        result.push(hash);
+        const hashValue = alpha ? toInt(str).toString(36) : toInt(str).toString();
+        const result = words ? toWords(str, hash ? hashValue.length : 0) : [];
+        if (hash) result.push(hashValue);
         return rightPad(result.join(delimiter));
     };
 }
+
+
 
 module.exports = hashFactory;

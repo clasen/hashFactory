@@ -1,4 +1,6 @@
-const hashFactory = require('../index.js');
+const path = require('path');
+const hashFactoryPath = path.join(__dirname, '..', 'index.js');
+const hashFactory = require(hashFactoryPath);
 
 const dbKey = hashFactory({
     alpha: true,
@@ -25,7 +27,7 @@ const fileId = hashFactory({
     maxlen: 30
 });
 
-console.log(fileId('Quarterly Financial Report Q3 2023.pdf'));
+console.log(fileId('😃 Quarterly Financial Report Q3 2023.pdf'));
 
 const urlSlug = hashFactory({
     maxlen: 40,
@@ -46,3 +48,6 @@ console.log(alphaHash('Hello World'));
 
 const hash = hashFactory();
 console.log(hash('Hello World')); // Outputs a numeric hash
+
+const hashId = hashFactory({ hash: false });
+console.log(hashId('Hello World')); // Outputs a worlds hash

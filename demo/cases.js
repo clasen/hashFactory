@@ -1,6 +1,6 @@
-// HashFactory usage examples
-
-const hashFactory = require('../index.js');
+const path = require('path');
+const hashFactoryPath = path.join(__dirname, '..', 'index.js');
+const hashFactory = require(hashFactoryPath);
 
 // Basic usage - default settings
 console.log('\n--- Basic Usage ---');
