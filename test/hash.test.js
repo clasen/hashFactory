@@ -124,4 +124,78 @@ describe('Hash Factory Tests', function() {
       expect(result).to.include('world');
     });
   });
+  
+  describe('Timestamp functionality', function() {
+    it('should add timestamp prefix when now=true', function() {
+      const hash = hashFactory({ now: true });
+      const result = hash('test string');
+      
+      const parts = result.split('_');
+      expect(parts.length).to.equal(2);
+      
+      // First part should be a timestamp (numeric)
+      expect(parts[0]).to.match(/^\d+$/);
+      
+      // Second part should be the hash
+      expect(parts[1]).to.match(/^\d+$/);
+    });
+    
+    it('should convert timestamp to base36 when now=true and alpha=true', function() {
+      const hash = hashFactory({ now: true, alpha: true });
+      const result = hash('test string');
+      
+      const parts = result.split('_');
+      expect(parts.length).to.equal(2);
+      
+      // First part should be a timestamp in base36 (alphanumeric)
+      expect(parts[0]).to.match(/^[a-z0-9]+$/i);
+      
+      // Second part should be the hash in base36
+      expect(parts[1]).to.match(/^[a-z0-9]+$/i);
+    });
+    
+    it('should maintain chronological sorting when now=true', function() {
+      const hash = hashFactory({ now: true });
+      
+      // Introduce a small delay between hashes
+      const result1 = hash('first');
+      
+      // Force a delay of at least 1ms
+      const startTime = Date.now();
+      while (Date.now() - startTime < 2) {
+        // Wait for at least 2ms
+      }
+      
+      const result2 = hash('second');
+      
+      const timestamp1 = parseInt(result1.split('_')[0]);
+      const timestamp2 = parseInt(result2.split('_')[0]);
+      
+      expect(timestamp2).to.be.greaterThan(timestamp1);
+    });
+    
+    it('should work with words option', function() {
+      const hash = hashFactory({ now: true, words: true, wcount: 1, wlen: -1 });
+      const result = hash('Hello World');
+      
+      const parts = result.split('_');
+      expect(parts.length).to.equal(3);
+      
+      // First part should be a timestamp
+      expect(parts[0]).to.match(/^\d+$/);
+      
+      // Middle parts should be words
+      expect(parts[1]).to.equal('hello');
+      
+      // Last part should be hash
+      expect(parts[2]).to.match(/^\d+$/);
+    });
+    
+    it('should respect maxlen when now=true', function() {
+      const hash = hashFactory({ now: true, maxlen: 25 });
+      const result = hash('test string');
+      
+      expect(result.length).to.be.at.most(25);
+    });
+  });
 }); 

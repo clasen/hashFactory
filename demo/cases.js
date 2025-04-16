@@ -114,3 +114,5 @@ const docFingerprint = hashFactory({
   padding: 'x'
 });
 console.log('Document fingerprint:', docFingerprint(paragraph1 + paragraph2 + paragraph3));
+
+

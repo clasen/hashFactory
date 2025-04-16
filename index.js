@@ -1,4 +1,4 @@
-function hashFactory({ hash = true, wcount = -1, wlen = 6, maxlen = 36, alpha = false, words = false, delimiter = '_', padding = null } = {}) {
+function hashFactory({ now = false, hash = true, wcount = -1, wlen = 6, maxlen = 36, alpha = false, words = false, delimiter = '_', padding = null } = {}) {
 
     if (hash === false) words = true;
 
@@ -57,12 +57,29 @@ function hashFactory({ hash = true, wcount = -1, wlen = 6, maxlen = 36, alpha = 
     }
 
     return function hashFunction(str) {
-        const hashValue = alpha ? toInt(str).toString(36) : toInt(str).toString();
-        const result = words ? toWords(str, hash ? hashValue.length : 0) : [];
-        if (hash) result.push(hashValue);
+        const result = [];
+
+        if (now) {
+            const timestamp = Date.now();
+            const timestampStr = alpha ? timestamp.toString(36) : timestamp.toString();
+            result.push(timestampStr);
+        }
+
+        const hashValue = hash ? (alpha ? toInt(str).toString(36) : toInt(str).toString()) : '';
+
+        if (words) {
+            let hashLength = hashValue.length;
+            if (result.length > 0) hashLength += delimiter.length + result[0].length;
+            result.push(...toWords(str, hashLength));
+        }
+
+        if (hash) {
+            result.push(hashValue);
+        }
+
         return rightPad(result.join(delimiter));
-    };
-}
+    }
+};
 
 
 

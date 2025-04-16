@@ -52,3 +52,18 @@ console.log(hash('Hello World')); // Outputs a numeric hash
 
 const hashId = hashFactory({ hash: false });
 console.log(hashId('Hello World')); // Outputs a worlds hash
+
+const timeOrderedId = hashFactory({ 
+    now: true,
+    alpha: true,
+    delimiter: '-'
+  });
+
+console.log(timeOrderedId('Monthly Report'));
+
+const wc = hashFactory({ words: true, wcount: 1, wlen: -1 });
+console.log(wc('Hello World Test'));
+
+const nw = hashFactory({ now: true, words: true, wlen: 3, alpha: true, maxlen: 20 });
+const result = nw('Hello World');
+console.log(result);

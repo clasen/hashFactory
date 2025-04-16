@@ -9,6 +9,7 @@
 - **Configurable**: Control output length, word count, delimiters, and more
 - **Zero Dependencies**: Works in Node.js and browsers with no external dependencies
 - **URL-Friendly**: Perfect for creating slugs, short IDs, and readable identifiers
+- **Timestamp Support**: Generate date-ordered IDs with built-in timestamps
 
 ## Installation
 
@@ -53,6 +54,11 @@ const customWordOnly = hashFactory({
 });
 customWordOnly('Hello Beautiful World');
 // Outputs "hell-beau-worl"
+
+// Create timestamp-prefixed identifiers for date ordering
+const timestampedHash = hashFactory({ now: true });
+timestampedHash('User Document');
+// Outputs "1698765432123_1661258373" (timestamp_hash)
 ```
 
 ## API Reference
@@ -65,6 +71,7 @@ Returns a hash function configured with the specified options.
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
+| `now` | Boolean | false | Add timestamp prefix to create date-ordered IDs |
 | `hash` | Boolean | true | Whether to append a hash to the output |
 | `wcount` | Number | -1 | Number of words to include (-1 for all words) |
 | `wlen` | Number | 6 | Length of each word (-1 for full words) |
@@ -89,6 +96,19 @@ const urlSlug = hashFactory({
 
 const articleUrl = urlSlug('How to Create URL-Friendly Slugs with HashFactory');
 // Output: "how-to-create-url-friendly-slugs-1qbtqvl"
+```
+
+### Date-Ordered Document IDs
+
+```javascript
+const timeOrderedId = hashFactory({ 
+  now: true,
+  alpha: true,
+  delimiter: '-'
+});
+
+timeOrderedId('Monthly Report');
+// Output: "m9j8gfx1-ipoqge" (timestamp-hash in base36)
 ```
 
 ### Short File IDs
