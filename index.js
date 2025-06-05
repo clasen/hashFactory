@@ -77,7 +77,8 @@ function hashFactory({ now = false, hash = true, wcount = -1, wlen = 6, maxlen =
             result.push(hashValue);
         }
 
-        return rightPad(result.join(delimiter));
+        const cleanedResult = result.filter(Boolean).join(delimiter);
+        return rightPad(cleanedResult);
     }
 };
 
